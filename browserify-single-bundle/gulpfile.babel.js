@@ -17,10 +17,6 @@ const bundleJS = (isWatch, isUglify) => {
 
   bundler.transform(babelify);
 
-  if (isWatch) {
-    bundler.plugin(watchify);
-  }
-
   const bundle = () => {
     return bundler.bundle()
       .on('error', (err) => {
@@ -34,7 +30,11 @@ const bundleJS = (isWatch, isUglify) => {
       .pipe(gulp.dest('dest/js'));
   };
 
-  bundler.on('update', bundle);
+  if (isWatch) {
+    bundler.plugin(watchify);
+    bundler.on('update', bundle);
+  }
+
   bundler.on('log', $.util.log);
 
   return bundle();
