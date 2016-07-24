@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import watchify from 'watchify';
+import licensify from 'licensify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import gulpLoadPlugins from 'gulp-load-plugins';
@@ -16,6 +17,7 @@ const bundleJS = (isWatch, isUglify) => {
   });
 
   bundler.transform(babelify);
+  bundler.plugin(licensify);
 
   const bundle = () => {
     return bundler.bundle()
@@ -25,7 +27,7 @@ const bundleJS = (isWatch, isUglify) => {
       .pipe(source('common.js'))
       .pipe(buffer())
       .pipe(isUglify ? $.sourcemaps.init({loadMaps: true}) : $.util.noop())
-      .pipe(isUglify ? $.uglify() : $.util.noop())
+      .pipe(isUglify ? $.uglify({ preserveComments: 'license' }) : $.util.noop())
       .pipe(isUglify ? $.sourcemaps.write() : $.util.noop())
       .pipe(gulp.dest('dest/js'));
   };
