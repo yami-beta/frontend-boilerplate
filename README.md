@@ -1,3 +1,3 @@
-# frontend-recipes
+# frontend-boilerplate
 
 WIP
