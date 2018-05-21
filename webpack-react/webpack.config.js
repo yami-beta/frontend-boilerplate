@@ -1,11 +1,10 @@
-const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require("path");
 
-let mode = process.env.WEBPACK_SERVE ? "development": "production"
+let mode = process.env.WEBPACK_SERVE ? "development" : "production";
 let publicPath = "/";
 
 module.exports = {
