@@ -10,7 +10,7 @@ let publicPath = "/";
 module.exports = {
   mode,
   entry: {
-    index: [path.join(__dirname, "src", "index.jsx")]
+    index: [path.join(__dirname, "src", "index.tsx")]
   },
   output: {
     path: path.join(__dirname, "dist"),
@@ -18,13 +18,13 @@ module.exports = {
     publicPath
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx", ".ts", "tsx"]
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        use: ["babel-loader"],
+        test: /\.(ts|tsx|js|jsx)$/,
+        use: ["ts-loader"],
         exclude: /node_modules/
       },
       {
